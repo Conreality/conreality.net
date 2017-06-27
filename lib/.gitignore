@@ -1,0 +1,3 @@
+# .NET build products
+*.dll
+*.xml
