@@ -3,7 +3,7 @@
   <metadata>
     <id>Conreality</id>
     <version>$version$</version>
-    <authors>conreality</authors>
+    <authors>Conreality.org</authors>
     <owners>conreality</owners>
     <projectUrl>https://sdk.conreality.org/.net/</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
@@ -22,4 +22,8 @@
       <frameworkAssembly assemblyName="System.Data" />
     </frameworkAssemblies>
   </metadata>
+  <files>
+    <file src="lib/Conreality.dll" target="lib" />
+    <file src="lib/Conreality.xml" target="lib" />
+  </files>
 </package>
