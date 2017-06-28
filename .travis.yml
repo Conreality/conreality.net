@@ -7,4 +7,4 @@ install:
   - nuget install Npgsql -Version 3.2.4.1
   - ln -s Npgsql.3.2.4.1/lib/net451/Npgsql.dll .
 script:
-  - make dist
+  - make && make check && make install
