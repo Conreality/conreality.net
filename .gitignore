@@ -4,5 +4,8 @@
 # Editor backup files
 *~
 
+# .NET assemblies
+*.dll
+
 # NuGet packages
-Conreality.*.nupkg
+*.nupkg
