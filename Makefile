@@ -1,13 +1,12 @@
 MCS   = mcs
 NUGET = nuget
 
-PACKAGE  = Conreality
-ASSEMBLY = $(PACKAGE)
-VERSION  = `cat VERSION`
+PACKAGE  := Conreality
+ASSEMBLY := $(PACKAGE)
+VERSION  := $(shell cat VERSION)
 
-SOURCES := $(wildcard src/*/*.cs src/*/*/*.cs)
-
-BINARIES = lib/$(ASSEMBLY).dll lib/$(ASSEMBLY).xml
+SOURCES  := $(wildcard src/*/*.cs src/*/*/*.cs)
+OUTPUTS  := lib/$(ASSEMBLY).dll lib/$(ASSEMBLY).xml
 
 lib/$(ASSEMBLY).dll: $(SOURCES)
 	$(MCS) -target:library              \
@@ -18,21 +17,21 @@ lib/$(ASSEMBLY).dll: $(SOURCES)
 
 lib/$(ASSEMBLY).xml: lib/$(ASSEMBLY).dll
 
-$(PACKAGE).$(VERSION).nupkg: $(PACKAGE).nuspec $(BINARIES)
+$(PACKAGE).$(VERSION).nupkg: $(PACKAGE).nuspec $(OUTPUTS)
 	$(NUGET) pack $(PACKAGE).nuspec     \
 	  -Version $(VERSION)               \
 	  -properties Configuration=Release
 
 all: build
 
-build: $(BINARIES)
+build: $(OUTPUTS)
 
 check:
 	@echo "not implemented" # TODO
 
 dist: $(PACKAGE).$(VERSION).nupkg
 
-install:
+install: $(PACKAGE).$(VERSION).nupkg
 	@echo "not implemented" # TODO
 
 clean:
