@@ -1,0 +1,9 @@
+# https://docs.travis-ci.com/user/languages/csharp/
+language: csharp
+sudo: false
+mono:
+  - latest
+install:
+  - nuget install Npgsql -Version 3.2.4.1
+script:
+  - make dist
