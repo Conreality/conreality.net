@@ -8,6 +8,9 @@ VERSION  := $(shell cat VERSION)
 SOURCES  := $(wildcard src/*/*.cs src/*/*/*.cs)
 OUTPUTS  := lib/$(ASSEMBLY).dll lib/$(ASSEMBLY).xml
 
+DESTDIR   = pkg
+PREFIX    =
+
 lib/$(ASSEMBLY).dll: $(SOURCES)
 	$(MCS) -target:library              \
 	  -r:Npgsql -r:System.Data          \
@@ -32,7 +35,12 @@ check:
 dist: $(PACKAGE).$(VERSION).nupkg
 
 install: $(PACKAGE).$(VERSION).nupkg
-	@echo "not implemented" # TODO
+	$(NUGET) install $(PACKAGE) -Version $(VERSION) \
+	  -Source "$(shell pwd)"                        \
+	  -OutputDirectory "$(DESTDIR)/$(PREFIX)"
+
+installdirs:
+	mkdir -p "$(DESTDIR)/$(PREFIX)"
 
 clean:
 	@rm -f *~ *.nupkg lib/*
@@ -41,4 +49,4 @@ distclean: clean
 
 mostlyclean: clean
 
-.PHONY: check install clean distclean mostlyclean
+.PHONY: check install installdirs clean distclean mostlyclean
