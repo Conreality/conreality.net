@@ -5,16 +5,9 @@ PACKAGE  = Conreality
 ASSEMBLY = $(PACKAGE)
 VERSION  = `cat VERSION`
 
-SOURCES =                                   \
-  src/Conreality/Action.cs                  \
-  src/Conreality/Client.cs                  \
-  src/Conreality/Game.cs                    \
-  src/Conreality/Session.cs                 \
-  src/Conreality/Properties/AssemblyInfo.cs
+SOURCES := $(wildcard src/*/*.cs src/*/*/*.cs)
 
-BINARIES =                                  \
-  lib/$(ASSEMBLY).dll                       \
-  lib/$(ASSEMBLY).xml
+BINARIES = lib/$(ASSEMBLY).dll lib/$(ASSEMBLY).xml
 
 lib/$(ASSEMBLY).dll: $(SOURCES)
 	$(MCS) -target:library              \
